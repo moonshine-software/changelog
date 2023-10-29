@@ -7,7 +7,7 @@
 ### Installation
 
 ```shell
-composer require moonshine-software/changelog
+composer require moonshine/changelog
 ```
 
 ```shell
