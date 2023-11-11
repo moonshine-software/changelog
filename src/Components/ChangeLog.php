@@ -8,7 +8,6 @@ use Closure;
 use Illuminate\Database\Eloquent\Model;
 use MoonShine\ActionButtons\ActionButton;
 use MoonShine\ChangeLog\Models\MoonshineChangeLog;
-use MoonShine\Components\FormBuilder;
 use MoonShine\Components\MoonshineComponent;
 use MoonShine\Components\TableBuilder;
 use MoonShine\Fields\Date;
@@ -21,8 +20,6 @@ use MoonShine\Resources\MoonShineUserResource;
 use MoonShine\Traits\HasResource;
 use MoonShine\Traits\WithLabel;
 use MoonShine\TypeCasts\ModelCast;
-
-use const _PHPStan_3334735b2\__;
 
 /**
  * @method static static make(Closure|string $label, ModelResource $resource)
@@ -117,7 +114,7 @@ final class ChangeLog extends MoonshineComponent
             ->buttons([
                 ActionButton::make(
                     'Restore',
-                    fn(MoonshineChangeLog $data) => route('moonshine.changelog', [
+                    fn (MoonshineChangeLog $data) => route('moonshine.changelog', [
                         'resourceUri' => $this->getResource()->uriKey(),
                         'changeLog' => $data->getKey(),
                         'resourceItem' => $this->getItem()->getKey(),
@@ -128,21 +125,21 @@ final class ChangeLog extends MoonshineComponent
                         __('moonshine::ui.confirm_message'),
                         __('moonshine::ui.confirm'),
                         fields: [
-                            HiddenIds::make()
+                            HiddenIds::make(),
                         ],
-                    )
-                    /*
-                    ->inModal(
-                    __('moonshine::ui.confirm'),
-                    content: fn(ActionButton $actionButton) => form(
-                        route('moonshine.changelog', [
-                            'resourceUri' => $this->getResource()->uriKey(),
-                            'changeLog' => $actionButton->getItem()->getKey(),
-                            'resourceItem' => $this->getItem()->getKey(),
-                        ]),
-                    )->submit('Restore')->render()
-                    )
-                    */
+                    ),
+                /*
+                ->inModal(
+                __('moonshine::ui.confirm'),
+                content: fn(ActionButton $actionButton) => form(
+                    route('moonshine.changelog', [
+                        'resourceUri' => $this->getResource()->uriKey(),
+                        'changeLog' => $actionButton->getItem()->getKey(),
+                        'resourceItem' => $this->getItem()->getKey(),
+                    ]),
+                )->submit('Restore')->render()
+                )
+                */
 
             ])
             ->withNotFound();
