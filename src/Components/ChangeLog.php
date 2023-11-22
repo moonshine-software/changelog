@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Database\Eloquent\Model;
 use MoonShine\ActionButtons\ActionButton;
 use MoonShine\ChangeLog\Models\MoonshineChangeLog;
-use MoonShine\Components\MoonshineComponent;
+use MoonShine\Components\MoonShineComponent;
 use MoonShine\Components\TableBuilder;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\HiddenIds;
@@ -24,7 +24,7 @@ use MoonShine\TypeCasts\ModelCast;
 /**
  * @method static static make(Closure|string $label, ModelResource $resource)
  */
-final class ChangeLog extends MoonshineComponent
+final class ChangeLog extends MoonShineComponent
 {
     use HasResource;
     use WithLabel;
