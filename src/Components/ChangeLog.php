@@ -84,7 +84,8 @@ final class ChangeLog extends MoonShineComponent
                                     return collect($data)->map(function ($value, $key) use ($before) {
                                         $badge = view('moonshine::ui.badge', ['value' => $key, 'color' => 'yellow'])
                                             ->render();
-                                        $value = str((string) $before->get($key, $value));
+                                        $value = str((string) $before->get($key, $value))
+                                            ->stripTags();
 
                                         return $badge . $value->limit();
                                     })->implode('<br /><hr class="divider" />');
@@ -98,7 +99,7 @@ final class ChangeLog extends MoonShineComponent
                                         $badge = view('moonshine::ui.badge', ['value' => $key, 'color' => 'green'])
                                             ->render();
 
-                                        return $badge . str((string) $value)->limit();
+                                        return $badge . str((string) $value)->stripTags()->limit();
                                     })->implode('<br /><hr class="divider" />');
                                 }
                             ),
