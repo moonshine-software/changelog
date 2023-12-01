@@ -47,10 +47,10 @@ class PostResource extends ModelResource
     protected function onBoot(): void
     {
         $this->getPages()
-                ->findByType(PageType::FORM)
+                ->formPage()
                 ->pushToLayer(
                     Layer::BOTTOM,
-                    ChangeLog::make('Changelog', $this->getResource())
+                    ChangeLog::make('Changelog', $this)
                 );
     }
     // ...
