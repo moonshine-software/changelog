@@ -57,3 +57,9 @@ class PostResource extends ModelResource
 }
 ```
 
+By default, the number of rows displayed is 5.
+To change this, use the setQuantityRow() method
+
+```php
+    ChangeLog::make('Changelog', $this)->setQuantityRow(10)
+```
