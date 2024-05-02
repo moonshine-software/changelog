@@ -57,3 +57,9 @@ class PostResource extends ModelResource
 }
 ```
 
+By default, 5 last changes are displayed.
+To change this, use the limit() method
+
+```php
+ChangeLog::make('Changelog', $this)->limit(10)
+```

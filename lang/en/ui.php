@@ -2,7 +2,7 @@
 
 return [
     'changes' => 'Changes',
-    'last_changes' => 'Last 5 changes',
+    'last_changes' => 'Last :limit changes',
     'field' => 'Field',
     'before' => 'Before',
     'after' => 'After',

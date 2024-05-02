@@ -36,12 +36,26 @@ final class ChangeLog extends MoonShineComponent
         'getResource',
     ];
 
+    protected int $limit = 5;
+
     public function __construct(
         Closure|string $label,
         ModelResource $resource
     ) {
         $this->setResource($resource);
         $this->setLabel($label);
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function limit(int $limit): self
+    {
+        $this->limit = $limit;
+
+        return $this;
     }
 
     public function getItem(): Model
@@ -51,7 +65,7 @@ final class ChangeLog extends MoonShineComponent
 
     protected function getTable(): TableBuilder
     {
-        $logs = $this->getItem()->changeLogs()->take(5)->get();
+        $logs = $this->getItem()->changeLogs()->take($this->getLimit())->get();
 
         return TableBuilder::make([
             ID::make(),
@@ -70,8 +84,7 @@ final class ChangeLog extends MoonShineComponent
                     $after = collect($data->states_after)
                         ->map(fn (mixed $value) => is_string($value) ? $value : json_encode($value))
                         ->diff($before)
-                        ->except([$data->getCreatedAtColumn(), $data->getUpdatedAtColumn()])
-                        ->filter();
+                        ->except([$data->getCreatedAtColumn(), $data->getUpdatedAtColumn()]);
 
                     return TableBuilder::make()
                         ->simple()
@@ -154,6 +167,7 @@ final class ChangeLog extends MoonShineComponent
             'table' => $this->getItem()?->exists
                 ? $this->getTable()
                 : '',
+            'limit' => $this->getLimit(),
         ];
     }
 }
