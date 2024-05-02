@@ -70,8 +70,7 @@ final class ChangeLog extends MoonShineComponent
                     $after = collect($data->states_after)
                         ->map(fn (mixed $value) => is_string($value) ? $value : json_encode($value))
                         ->diff($before)
-                        ->except([$data->getCreatedAtColumn(), $data->getUpdatedAtColumn()])
-                        ->filter();
+                        ->except([$data->getCreatedAtColumn(), $data->getUpdatedAtColumn()]);
 
                     return TableBuilder::make()
                         ->simple()
