@@ -2,7 +2,7 @@
 
 return [
     'changes' => 'Изменения',
-    'last_changes' => 'Последние 5 изменений',
+    'last_changes' => 'Последние :quantityRow изменений',
     'field' => 'Поле',
     'before' => 'До',
     'after' => 'После',

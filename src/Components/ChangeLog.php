@@ -36,12 +36,26 @@ final class ChangeLog extends MoonShineComponent
         'getResource',
     ];
 
+    protected int $quantityRow = 5;
+
     public function __construct(
         Closure|string $label,
         ModelResource $resource
     ) {
         $this->setResource($resource);
         $this->setLabel($label);
+    }
+
+    public function quantityRow(): int
+    {
+        return $this->quantityRow;
+    }
+
+    public function setCountRow(int $quantityRow = 5): static
+    {
+        $this->quantityRow = $quantityRow;
+
+        return $this;
     }
 
     public function getItem(): Model
@@ -51,7 +65,7 @@ final class ChangeLog extends MoonShineComponent
 
     protected function getTable(): TableBuilder
     {
-        $logs = $this->getItem()->changeLogs()->take(5)->get();
+        $logs = $this->getItem()->changeLogs()->take($this->quantityRow)->get();
 
         return TableBuilder::make([
             ID::make(),
@@ -153,6 +167,7 @@ final class ChangeLog extends MoonShineComponent
             'table' => $this->getItem()?->exists
                 ? $this->getTable()
                 : '',
+            'quantityRow' => $this->quantityRow(),
         ];
     }
 }

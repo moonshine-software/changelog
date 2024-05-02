@@ -2,7 +2,7 @@
 
 return [
     'changes' => 'Changes',
-    'last_changes' => 'Last 5 changes',
+    'last_changes' => 'Last :quantityRow changes',
     'field' => 'Field',
     'before' => 'Before',
     'after' => 'After',
