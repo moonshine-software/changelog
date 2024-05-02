@@ -65,7 +65,7 @@ final class ChangeLog extends MoonShineComponent
 
     protected function getTable(): TableBuilder
     {
-        $logs = $this->getItem()->changeLogs()->take($this->quantityRow)->get();
+        $logs = $this->getItem()->changeLogs()->take($this->quantityRow())->get();
 
         return TableBuilder::make([
             ID::make(),
