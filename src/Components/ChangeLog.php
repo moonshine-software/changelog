@@ -51,7 +51,7 @@ final class ChangeLog extends MoonShineComponent
         return $this->limit;
     }
 
-    public function limit(int $limit = 5): self
+    public function limit(int $limit): self
     {
         $this->limit = $limit;
 
