@@ -36,7 +36,7 @@ final class ChangeLog extends MoonShineComponent
         'getResource',
     ];
 
-    protected int $quantityRow = 5;
+    protected int $limit = 5;
 
     public function __construct(
         Closure|string $label,
@@ -46,14 +46,14 @@ final class ChangeLog extends MoonShineComponent
         $this->setLabel($label);
     }
 
-    public function quantityRow(): int
+    public function getLimit(): int
     {
-        return $this->quantityRow;
+        return $this->limit;
     }
 
-    public function setCountRow(int $quantityRow = 5): static
+    public function limit(int $limit = 5): self
     {
-        $this->quantityRow = $quantityRow;
+        $this->limit = $limit;
 
         return $this;
     }
@@ -65,7 +65,7 @@ final class ChangeLog extends MoonShineComponent
 
     protected function getTable(): TableBuilder
     {
-        $logs = $this->getItem()->changeLogs()->take($this->quantityRow())->get();
+        $logs = $this->getItem()->changeLogs()->take($this->getLimit())->get();
 
         return TableBuilder::make([
             ID::make(),
@@ -84,7 +84,8 @@ final class ChangeLog extends MoonShineComponent
                     $after = collect($data->states_after)
                         ->map(fn (mixed $value) => is_string($value) ? $value : json_encode($value))
                         ->diff($before)
-                        ->except([$data->getCreatedAtColumn(), $data->getUpdatedAtColumn()]);
+                        ->except([$data->getCreatedAtColumn(), $data->getUpdatedAtColumn()])
+                        ->filter(fn () => 'strlen');
 
                     return TableBuilder::make()
                         ->simple()
@@ -167,7 +168,7 @@ final class ChangeLog extends MoonShineComponent
             'table' => $this->getItem()?->exists
                 ? $this->getTable()
                 : '',
-            'quantityRow' => $this->quantityRow(),
+            'limit' => $this->getLimit(),
         ];
     }
 }

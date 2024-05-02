@@ -6,7 +6,7 @@
     </x-moonshine::title>
 
     <div class="pt-2 mb-6">
-        @lang('moonshine-changelog::ui.last_changes', ['quantityRow' => $quantityRow])
+        @lang('moonshine-changelog::ui.last_changes', ['limit' => $limit])
     </div>
 
     {{ $table->render() }}

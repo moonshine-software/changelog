@@ -57,9 +57,9 @@ class PostResource extends ModelResource
 }
 ```
 
-By default, the number of rows displayed is 5.
-To change this, use the setQuantityRow() method
+By default, 5 last changes are displayed.
+To change this, use the limit() method
 
 ```php
-    ChangeLog::make('Changelog', $this)->setQuantityRow(10)
+ChangeLog::make('Changelog', $this)->limit(10)
 ```
