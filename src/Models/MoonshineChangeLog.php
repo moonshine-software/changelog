@@ -7,7 +7,7 @@ namespace MoonShine\ChangeLog\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use MoonShine\MoonShineAuth;
+use MoonShine\Laravel\MoonShineAuth;
 
 class MoonshineChangeLog extends Model
 {
@@ -28,12 +28,12 @@ class MoonshineChangeLog extends Model
 
     public function moonshineUser(): BelongsTo
     {
-        $model = MoonShineAuth::model();
+        $model = MoonShineAuth::getModel();
 
         return $this->belongsTo(
             $model::class,
             'moonshine_user_id',
-            $model->getKeyName(),
+            $model?->getKeyName(),
         );
     }
 

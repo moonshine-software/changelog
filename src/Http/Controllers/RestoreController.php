@@ -6,9 +6,9 @@ namespace MoonShine\ChangeLog\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use MoonShine\ChangeLog\Models\MoonshineChangeLog;
-use MoonShine\Http\Controllers\MoonShineController;
-use MoonShine\MoonShineRequest;
-use MoonShine\Resources\ModelResource;
+use MoonShine\Laravel\Http\Controllers\MoonShineController;
+use MoonShine\Laravel\MoonShineRequest;
+use MoonShine\Laravel\Resources\ModelResource;
 use Symfony\Component\HttpFoundation\Response;
 
 class RestoreController extends MoonShineController
@@ -23,7 +23,12 @@ class RestoreController extends MoonShineController
         $item = $resource->getItem();
 
         if(!is_null($item)) {
-            $item->fill($changeLog->states_before);
+            $item->fill(
+                collect($changeLog->states_before)
+                    ->only($item->getFillable())
+                    ->toArray()
+            );
+
             $item->save();
 
             $this->toast('Restored');

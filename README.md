@@ -2,7 +2,14 @@
 
 ### Requirements
 
-- MoonShine v2.0+
+- MoonShine v3.0+
+
+### Support MoonShine versions
+
+| MoonShine   | ChangeLog    |
+|-------------|--------------|
+| 2.0+        | 1.0+         |
+| 3.0+        | 2.0 +        |
 
 ### Installation
 
@@ -44,14 +51,12 @@ or in Resource
 class PostResource extends ModelResource
 {
     // ...
-    protected function onBoot(): void
+    protected function onLoad(): void
     {
-        $this->getPages()
-                ->formPage()
-                ->pushToLayer(
-                    Layer::BOTTOM,
-                    ChangeLog::make('Changelog', $this)
-                );
+        $this->getFormPage()->pushToLayer(
+            Layer::BOTTOM,
+            ChangeLog::make('Changelog', $this)
+        );
     }
     // ...
 }
@@ -62,4 +67,11 @@ To change this, use the limit() method
 
 ```php
 ChangeLog::make('Changelog', $this)->limit(10)
+```
+
+By default, Resource of BelongsTo is `MoonShine\Laravel\Resources\MoonShineUserResource`
+To change this, use the `userResource` parameter
+
+```php
+ChangeLog::make('Changelog', $this, userResource: \App\MoonShine\Resources\MoonShineUserResource::class)->limit(10)
 ```
