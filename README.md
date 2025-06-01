@@ -40,7 +40,7 @@ protected function bottomLayer(): array
     return [
         ...parent::bottomLayer(),
 
-        ChangeLog::make('Changelog', $this->getResource())
+        ChangeLog::make('Changelog', $this, \App\MoonShine\Resources\MoonShineUserResource::class)
     ];
 }
 ```
@@ -55,7 +55,7 @@ class PostResource extends ModelResource
     {
         $this->getFormPage()->pushToLayer(
             Layer::BOTTOM,
-            ChangeLog::make('Changelog', $this)
+            ChangeLog::make('Changelog', $this, \App\MoonShine\Resources\MoonShineUserResource::class)
         );
     }
     // ...
