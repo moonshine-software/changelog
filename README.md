@@ -2,14 +2,15 @@
 
 ### Requirements
 
-- MoonShine v3.0+
+- MoonShine v4.0+
 
 ### Support MoonShine versions
 
-| MoonShine   | ChangeLog   |
-|-------------|-------------|
-| 2.0+        | 1.0+        |
-| 3.0+        | 2.0+        |
+| MoonShine | ChangeLog |
+|-----------|-----------|
+| 2.0+      | 1.0+      |
+| 3.0+      | 2.0+      |
+| 4.0+      | 3.0+      |
 
 ### Installation
 
@@ -40,7 +41,7 @@ protected function bottomLayer(): array
     return [
         ...parent::bottomLayer(),
 
-        ChangeLog::make('Changelog', $this, \App\MoonShine\Resources\MoonShineUserResource::class)
+        ChangeLog::make('Changelog', $this->getResource(), \App\MoonShine\Resources\MoonShineUserResource::class)
     ];
 }
 ```
